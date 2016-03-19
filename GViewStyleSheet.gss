@@ -1,0 +1,418 @@
+
+FeatureFilter
+{
+	set1 : feature-filter(and(type("CDS"),strand("positive")));
+	set0 : feature-filter(and(type("CDS"),strand("negative")));
+}
+
+background
+{
+	color : color("white");
+}
+
+backbone
+{
+	color : color("black");
+	thickness : 2.0;
+	backbone-effect : shape-effect("basic");
+}
+
+ruler
+{
+	major-tick-color : color("black");
+	minor-tick-color : color("black");
+	label-color : color("black");
+	label-background-color : color(0,0,0,0);
+	label-location : "below";
+	major-tick-length : 10.0;
+	minor-tick-length : 3.0;
+	tick-density : 1.0;
+	tick-thickness : 1.0;
+	tick-padding : 10.0;
+	label-font : font("Serif","plain",10);
+	tick-effect : shape-effect("basic");
+}
+
+tooltip
+{
+	text-color : color("black");
+	outline-color : color("black");
+	background-color : color(228,231,235,255);
+	font : font("Serif","plain",14);
+}
+
+legend#0
+{
+	background-color : color("white");
+	border-color : color(0,0,0,0);
+	text-color : color("black");
+	text-font : font("SansSerif","plain",12);
+	alignment : "upper-left";
+}
+
+legend#0 legenditem#0
+{
+	show-swatch : "true";
+	swatch-color : color(87,21,21,255);
+	text-color : color("black");
+	text-font : font("SansSerif","plain",12);
+	legend-text : "Positve Stranded CDS";
+	link : "1";
+}
+
+legend#0 legenditem#1
+{
+	show-swatch : "true";
+	swatch-color : color(55,64,87,255);
+	text-color : color("black");
+	text-font : font("SansSerif","plain",12);
+	legend-text : "Negative Stranded CDS";
+	link : "2";
+}
+
+slot
+{
+	spacing : 4.0;
+}
+
+slot#-1
+{
+	color : color("blue");
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#-1 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#-1 FeatureSet#set0
+{
+	color : color(55,64,87,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("counterclockwise-arrow");
+	thickness-proportion : 1.0;
+	tooltip-text : text-extractor(annotation("product"));
+	link : "2";
+}
+
+slot#-1 FeatureSet#set0 labels
+{
+	text-color : color(55,64,87,255);
+	background-color : color(255,255,255,0);
+	font : font("Serif","plain",12);
+	label-extractor : text-extractor(annotation("gene"));
+	show-labels : "false";
+}
+
+slot#-2
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#-2 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#-2 plot
+{
+	color : color(25,255,13,255);
+	color : color(0,140,9,255);
+	data : gccontent("");
+	type : center;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#-3
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#-3 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#-3 plot
+{
+	color : color(252,36,20,255);
+	color : color(173,21,16,255);
+	data : gcskew("");
+	type : center;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#1
+{
+	color : color("blue");
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#1 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#1 FeatureSet#set1
+{
+	color : color(87,21,21,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("clockwise-arrow");
+	thickness-proportion : 1.0;
+	tooltip-text : text-extractor(annotation("product"));
+	link : "1";
+}
+
+slot#1 FeatureSet#set1 labels
+{
+	text-color : color(87,21,21,255);
+	background-color : color(255,255,255,0);
+	font : font("Serif","plain",12);
+	label-extractor : text-extractor(annotation("gene"));
+	show-labels : "false";
+}
+
+slot#2
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#2 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#2 plot
+{
+	color : color(147,173,0,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","issaga.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#3
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#3 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#3 plot
+{
+	color : color(158,0,179,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","oasis.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#4
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#4 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#4 plot
+{
+	color : color(27,106,143,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","phispy.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#5
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#5 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#5 plot
+{
+	color : color(217,28,97,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","virsorter.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#6
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#6 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#6 plot
+{
+	color : color(255,139,15,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","minced.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#7
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#7 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#7 plot
+{
+	color : color(222,218,0,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","sniffer.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#8
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#8 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#8 plot
+{
+	color : color(157,161,149,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","oligowords.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
+
+slot#9
+{
+	color : color(200,200,200,255);
+	feature-effect : shape-effect("standard");
+	feature-shape : shape("block");
+	thickness : 12.0;
+}
+
+slot#9 labels
+{
+	text-color : color("black");
+	background-color : color("none");
+	font : font("SansSerif","plain",14);
+	label-extractor : text-extractor("location");
+	show-labels : "false";
+}
+
+slot#9 plot
+{
+	color : color(61,219,193,255);
+	color : color(35,74,34,255);
+	data : plot-file("range","alienhunter.csv");
+	type : bar;
+	grid-lines : 1;
+	grid-color : color("black");
+}
