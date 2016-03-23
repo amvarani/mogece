@@ -6,7 +6,7 @@ Mobile Genetic Elements Coordinates Extractor (MoGECE) is a program that extract
 
 ## RELEASE
 
-Version 1.0 - March 19, 2016.
+Version 1.0.1 - March 23, 2016.
 
 Available from <https://github.com/danillo-alvarenga/mogece>.
 

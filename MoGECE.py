@@ -3,7 +3,7 @@
 # MoGECE: extract coordinates for mobile genetic elements from outputs
 # produced by MGE detection software
 #
-# Version 1.0 - March 19, 2016
+# Version 1.0.1 - March 23, 2016
 #
 # Copyright © 2016 Danillo Oliveira Alvarenga
 #
@@ -27,7 +27,7 @@ parser = argparse.ArgumentParser(
             description = "Mobile Genetic Elements Coordinates Extractor")
 
 parser.add_argument("-v", "--version", action = "version",
-                    version = "%(prog)s 1.0", help = "show version and exit")
+                    version = "%(prog)s 1.0.1", help = "show version and exit")
 
 parser.add_argument("-f", "--file", metavar = "File", required = True,
                     help = "prediction file")
@@ -118,7 +118,7 @@ def is_saga():
 
                     scores.append('1')
 
-                    isfamilies.append(line[family])
+                    isfamilies.append(line[family].replace("/IS", "|IS"))
 
     return ("issaga", "transposase", "ISsaga")
 
