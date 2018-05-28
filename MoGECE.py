@@ -3,9 +3,9 @@
 # MoGECE: extract coordinates for mobile genetic elements from outputs
 # produced by MGE detection software
 #
-# Version 1.0.1 - March 23, 2016
+# Version 1.0.2 - May 28, 2018
 #
-# Copyright © 2016 Danillo Oliveira Alvarenga
+# Copyright © 2018 Danillo Oliveira Alvarenga
 #
 # MoGECE is free software: you can redistribute it and/or modify it under the
 # terms of the GNU Affero General Public License as published by the Free
@@ -19,52 +19,54 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with MoGECE. If not, see <http://www.gnu.org/licenses/agpl-3.0.html>.
-
+#
 import argparse
+
 
 # Get command line arguments.
 parser = argparse.ArgumentParser(
-            description = "Mobile Genetic Elements Coordinates Extractor")
+            description="Mobile Genetic Element Coordinates Extractor")
 
-parser.add_argument("-v", "--version", action = "version",
-                    version = "%(prog)s 1.0.1", help = "show version and exit")
+parser.add_argument("-v", "--version", action="version",
+                    version="%(prog)s 1.0.2", help="show version and exit")
 
-parser.add_argument("-f", "--file", metavar = "File", required = True,
-                    help = "prediction file")
+parser.add_argument("-f", "--file", metavar="File", required=True,
+                    help="prediction file")
 
-group = parser.add_mutually_exclusive_group(required = True)
-group.add_argument("-l", "--alienhunter", action = "store_true",
-                   help = "using Alien_Hunter sco prediction file")
-group.add_argument("-i", "--issaga", action = "store_true",
-                   help = "using ISsaga csv prediction file")
-group.add_argument("-m", "--minced", action = "store_true",
-                   help = "using MinCED gff prediction file")
-group.add_argument("-o", "--oasis", action = "store_true",
-                   help = "using OASIS gff prediction file")
-group.add_argument("-w", "--oligowords", action = "store_true",
-                   help = "using OligoWords out prediction file")
-group.add_argument("-p", "--phispy", action = "store_true",
-                   help = "using PhiSpy tbl prediction file")
-group.add_argument("-s", "--sniffer", action = "store_true",
-                   help = "using SeqWordSniffer out prediction file")
-group.add_argument("-r", "--virsorter", action = "store_true",
-                   help = "using VirSorter fasta prediction file")
+xgroup = parser.add_mutually_exclusive_group(required=True)
+xgroup.add_argument("-l", "--alienhunter", action="store_true",
+                   help="using Alien_Hunter sco prediction file")
+xgroup.add_argument("-i", "--issaga", action="store_true",
+                   help="using ISsaga csv prediction file")
+xgroup.add_argument("-m", "--minced", action="store_true",
+                   help="using MinCED gff prediction file")
+xgroup.add_argument("-o", "--oasis", action="store_true",
+                   help="using OASIS gff prediction file")
+xgroup.add_argument("-w", "--oligowords", action="store_true",
+                   help="using OligoWords out prediction file")
+xgroup.add_argument("-p", "--phispy", action="store_true",
+                   help="using PhiSpy tbl prediction file")
+xgroup.add_argument("-s", "--sniffer", action="store_true",
+                   help="using SeqWordSniffer out prediction file")
+xgroup.add_argument("-r", "--virsorter", action="store_true",
+                   help="using VirSorter fasta prediction file")
 
-parser.add_argument("-a", "--artemis", action = "store_true",
-                    help = "generate an Artemis gff file")
-parser.add_argument("-g", "--gview", action = "store_true",
-                    help = "generate a GView csv file")
+parser.add_argument("-a", "--artemis", action="store_true",
+                    help="generate an Artemis gff file")
+parser.add_argument("-g", "--gview", action="store_true",
+                    help="generate a GView csv file")
 
 args = parser.parse_args()
 
 if not (args.gview or args.artemis):
     parser.error("Please indicate a visualization program")
 
-# Create lists for MGE coordinates and scores
+# Create lists for MGE coordinates and scores.
 beginnings = []
 ends = []
 scores = []
 isfamilies = []
+
 
 # Get coordinates from an Alien_Hunter output file.
 def alien_hunter():
@@ -79,13 +81,13 @@ def alien_hunter():
                 beginning = line[-1].split("..")[0].strip()
                 end = line[-1].split("..")[1].strip()
                 add_coordinates(beginning, end)
-
             else:
                 score = line[-1].split("=")[1].strip()
                 score = str(round(float(score), 1))
                 scores.append(score)
 
     return ("alienhunter", "genomic island", "Alien_Hunter")
+
 
 # Get coordinates from an ISsaga output file.
 def is_saga():
@@ -110,7 +112,6 @@ def is_saga():
                     ORF_L = line.index('orf_L')
                     ORF_R = line.index('orf_R')
                     family = line.index('family')
-
                 elif ORF_L is not 0 and ORF_R is not 0:
                     beginning = line[ORF_L]
                     end = line[ORF_R]
@@ -121,6 +122,7 @@ def is_saga():
                     isfamilies.append(line[family].replace("/IS", "|IS"))
 
     return ("issaga", "transposase", "ISsaga")
+
 
 # Get coordinates from a MinCED output file.
 def min_ced():
@@ -134,13 +136,14 @@ def min_ced():
 
             line = line.split("\t")
 
-            beginning = line[line.index("CRISPR") + 1]
-            end = line[line.index("CRISPR") + 2]
+            beginning = line[line.index("repeat_region") + 1]
+            end = line[line.index("repeat_region") + 2]
             add_coordinates(beginning, end)
 
             scores.append('1')
 
     return ("minced", "CRISPR", "MinCED")
+
 
 # Get coordinates from an OASIS output file.
 def oas_is():
@@ -158,6 +161,7 @@ def oas_is():
             scores.append('1')
 
     return ("oasis", "transposase", "OASIS")
+
 
 # Get coordinates from an OligoWords output file.
 def oligo_words():
@@ -187,6 +191,7 @@ def oligo_words():
 
     return ("oligowords", "genomic island", "OligoWords")
 
+
 # Get coordinates from a PhiSpy output file.
 def phi_spy():
 
@@ -203,6 +208,7 @@ def phi_spy():
             scores.append('1')
 
     return ("phispy", "prophage", "PhiSpy")
+
 
 # Get coordinates from a SeqWord Gene Island Sniffer output file.
 def seqword_sniffer():
@@ -226,6 +232,7 @@ def seqword_sniffer():
 
     return ("sniffer", "genomic island", "SeqWord Sniffer")
 
+
 # Get coordinates from a VirSorter output file.
 def vir_sorter():
 
@@ -245,6 +252,7 @@ def vir_sorter():
 
     return ("virsorter", "prophage", "VirSorter")
 
+
 # Add coordinates to lists making sure the ORF is correct.
 def add_coordinates(beginning, end):
 
@@ -253,6 +261,7 @@ def add_coordinates(beginning, end):
 
     beginnings.append(beginning)
     ends.append(end)
+
 
 # Generate a range file containing coordinates for visualization in GView.
 def create_csv(feature):
@@ -264,6 +273,7 @@ def create_csv(feature):
         while i < len(scores):
             csv.write(beginnings[i] + ',' + ends[i] + ',' + scores[i] + '\n')
             i += 1
+
 
 # Generate a feature table from coordinates for visualization in Artemis.
 def create_ft(feature):
@@ -309,6 +319,7 @@ def create_ft(feature):
                          "/score=" + scores[i] + "\n")
                 i += 1
 
+
 # Run functions according to corresponding arguments.
 def main():
 
@@ -333,6 +344,7 @@ def main():
         create_ft(feature)
     if args.gview:
         create_csv(feature)
+
 
 if __name__ == "__main__":
     main()

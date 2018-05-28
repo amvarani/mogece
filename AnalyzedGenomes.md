@@ -24,6 +24,8 @@
 | *Sulfolobus solfataricus* SULA            | Thermoprotei        | 2,727,337 | NZ_CP011057           | McCarthy et al., 2015   |
 | *Xyllela fastidiosa* 9a5c                 | Gammaproteobacteria | 2,679,306 | NC_002488             | Simpson et al., 2000    |
 
+---
+
 ### References
 
 Akamatsu MA, Nishiyama Jr MY, Morone M (2015) Whole-genome sequence of a *Bordetella pertussis* Brazilian vaccine strain. Genome Announc 3:e01570-14
@@ -67,3 +69,9 @@ White O, Elsen JA, Heidelberg JF et al (1999) Genome sequence of the radioresist
 Ye C, Lan R, Xia S et al (2010) Emergence of a new multidrug-resistant serotype X variant in an epidemic clone of *Shigella flexneri*. J Clin Microbiol 48:419-426
 
 Young JP, Crossman LC, Johnston AW et al (2006) The genome of *Rhizobium leguminosarum* has recognizable core and accessory components. Genome Biol 7:R34
+
+---
+
+### License
+
+The AnalyzedGenomes dataset is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <http://creativecommons.org/licenses/by-sa/4.0/>.
